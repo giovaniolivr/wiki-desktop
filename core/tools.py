@@ -23,6 +23,16 @@ TOOLS = [
         # busca e no chatbot, além das palavras do próprio nome.
         'keywords': ['script', 'gerador', 'sa', 'salesforce', 'sis', 'ficha', 'mudanca de plano', 'alteracao de plano'],
     },
+    {
+        'name': 'Batimento de SAs',
+        'url_name': 'batimento',
+        'description': (
+            'Filtra a planilha de SAs exportada do Power BI (.xlsx) para o batimento: escolhe regional, '
+            'status e tipo de trabalho, traz canceladas/concluídas só dos últimos dias e deixa as linhas '
+            'prontas para copiar e colar na planilha compartilhada (ou baixar com o menu de status).'
+        ),
+        'keywords': ['batimento', 'aging', 'age', 'power bi', 'powerbi', 'planilha', 'xlsx', 'excel', 'filtro'],
+    },
 ]
 
 # Palavras que, sozinhas, significam "quero ver as ferramentas".

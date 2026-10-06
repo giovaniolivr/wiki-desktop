@@ -8,6 +8,7 @@ urlpatterns = [
     path('busca/', views.search, name='search'),
     path('chat/', views.chat, name='chat'),
     path('ferramentas/gerador-sa/', views.script_generator, name='script_generator'),
+    path('ferramentas/batimento/', views.batimento, name='batimento'),
 
     # Layers 2 & 3
     path('topico/<slug:major_slug>/', views.major_topic, name='major_topic'),

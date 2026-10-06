@@ -164,6 +164,15 @@ def script_generator(request):
     })
 
 
+def batimento(request):
+    # A planilha do Power BI é lida e filtrada só no navegador (static/js/batimento.js);
+    # o arquivo nunca chega ao servidor.
+    js_path = finders.find('js/batimento.js')
+    return render(request, 'tools/batimento.html', {
+        'js_version': int(os.path.getmtime(js_path)) if js_path else 0,
+    })
+
+
 # ── Search ────────────────────────────────────────────────────────────────────
 
 def search(request):

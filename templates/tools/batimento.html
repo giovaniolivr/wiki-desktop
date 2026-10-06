@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Batimento de SAs{% endblock %}
+
+{% block content %}
+<div class="max-w-[1600px] mx-auto px-4 sm:px-6 py-8 sm:py-10">
+
+  <div class="mb-8">
+    <nav class="flex items-center gap-2 text-sm text-mute mb-4">
+      <span>Ferramentas</span>
+      <span>/</span>
+      <span class="text-body font-medium">Batimento de SAs</span>
+    </nav>
+    <h1 class="text-[28px] sm:text-[32px] font-bold text-ink tracking-[-1.2px] leading-tight">Batimento de SAs</h1>
+    <p class="text-sm text-body/80 mt-1">
+      Baixe o .xlsx do Power BI, solte aqui, escolha os filtros e copie as linhas para a planilha.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-[300px_minmax(0,1fr)] gap-6 items-start">
+
+    <!-- Filtros -->
+    <section class="space-y-5 bg-white border-2 border-brand-red rounded-2xl p-5">
+      <label id="drop" for="f-file"
+             class="flex flex-col items-center justify-center gap-1 px-4 py-6 rounded-2xl border-2 border-dashed border-hairline bg-card text-center cursor-pointer hover:border-brand-yellow transition">
+        <svg class="w-7 h-7 text-brand-red" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 16V4m0 0-4 4m4-4 4 4M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+        <span id="file-name" class="text-sm font-bold text-ink">Escolher ou soltar o .xlsx</span>
+        <span id="file-info" class="text-xs text-mute">Export do Power BI</span>
+        <input id="f-file" type="file" accept=".xlsx" class="sr-only" />
+      </label>
+      <p id="error" class="hidden px-4 py-3 rounded-2xl bg-brand-yellow/20 text-sm font-semibold text-ink"></p>
+
+      <div id="filters" class="hidden space-y-5">
+        <fieldset>
+          <legend class="text-sm font-bold text-ink mb-2">Regional</legend>
+          <div id="g-regional" class="space-y-1"></div>
+        </fieldset>
+        <fieldset>
+          <legend class="text-sm font-bold text-ink mb-2">Status</legend>
+          <div id="g-status" class="space-y-1"></div>
+        </fieldset>
+        <div id="period-group" class="hidden">
+          <div id="g-period" class="space-y-4 px-4 py-3 rounded-2xl bg-card"></div>
+        </div>
+        <fieldset>
+          <legend class="text-sm font-bold text-ink mb-2">Tipo de trabalho</legend>
+          <div id="g-tipo" class="space-y-1"></div>
+        </fieldset>
+      </div>
+    </section>
+
+    <!-- Linhas -->
+    <section class="bg-white border-2 border-brand-red rounded-2xl p-5 sm:p-6 min-w-0">
+      <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
+        <h2 class="text-sm font-bold text-ink">Linhas <span id="count" class="font-normal text-mute"></span></h2>
+        <div class="flex gap-2">
+          <button id="copy-btn" type="button" disabled
+                  class="h-10 px-5 rounded-2xl bg-brand-red text-white font-bold text-sm hover:bg-brand-redhov transition disabled:opacity-40 disabled:cursor-not-allowed">
+            Copiar linhas
+          </button>
+          <button id="download-btn" type="button" disabled
+                  class="h-10 px-5 rounded-2xl bg-white border-2 border-brand-red text-brand-red font-bold text-sm hover:bg-brand-red/10 transition disabled:opacity-40 disabled:cursor-not-allowed">
+            Baixar .xlsx
+          </button>
+        </div>
+      </div>
+      <div id="empty" class="px-4 py-10 rounded-2xl bg-brand-yellow/20 text-center text-sm text-body">
+        Nenhuma planilha carregada.
+      </div>
+      <div id="table-wrap" class="hidden overflow-auto max-h-[70vh] rounded-2xl border-2 border-hairline">
+        <table id="table" class="text-xs text-ink whitespace-nowrap border-collapse"></table>
+      </div>
+      <p class="mt-3 text-xs text-mute">
+        A cópia leva só os dados (sem cabeçalho) até a coluna Age. STATUS e Obs ficam na planilha; o .xlsx já vem com o menu suspenso de STATUS.
+      </p>
+    </section>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="{% static 'js/batimento.js' %}?v={{ js_version }}"></script>
+{% endblock %}
