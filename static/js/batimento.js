@@ -150,7 +150,7 @@
     sa.closest('label').insertAdjacentHTML('afterend', `
       <label id="chip-row" class="flex items-center gap-2.5 pl-8 pr-2 h-8 rounded-xl text-sm text-body cursor-pointer hover:bg-card">
         <input id="f-chip" type="checkbox" class="w-4 h-4 accent-brand-red" />
-        <span class="flex-1 truncate">Incluir Entrega de Chip</span>
+        <span class="flex-1 truncate">Entrega de Chip</span>
         <span class="text-xs text-mute">${rows.filter(isChip).length}</span>
       </label>`);
     days = {};
